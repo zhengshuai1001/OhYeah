@@ -1,0 +1,257 @@
+.we-chat-pay-page{
+    background-color: #f0f0f0;
+    /* position: fixed; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.we-chat-pay-page .weui_cell_bd{
+    /* font-size: 0.3rem; */
+    font-size: 15px;
+    color: #3c3c3c;
+    font-weight: 700;
+}
+.we-chat-pay-page .weui_cell_ft{
+    /* font-size: 0.28rem; */
+    font-size: 14px;
+    color: #bbbbbb;
+}
+.we-chat-pay-page .weui_cells.first-cells{
+    margin-top:0;
+}
+.we-chat-pay-page .weui_cells{
+    /* padding: 0rem 0.25rem;
+    margin-top: 0.3rem; */
+    padding: 0 12px;
+    margin-top: 15px;
+}
+.we-chat-pay-page .weui_cell{
+    /* padding: 0.3rem; */
+    padding: 15px 10px;
+}
+.weui_cells.three .weui_cell_ft .iconfont{
+    /* font-size: 0.3rem;
+    margin-left: 0.1rem; */
+    font-size: 15px;
+    margin-left: 5px;
+    color: #bbbbbb;
+}
+.weui_cells.four .price{
+    width: 100%;
+    text-align: center;
+    /* font-size: 0.6rem; */
+    font-size: 30px;
+    font-weight: 700;
+}
+.weui_cells.four .price .iconfont{
+    /* font-size: 0.4rem; */
+    font-size: 18px;
+    vertical-align: middle;
+}
+.weui_btn.pay {
+    width: 90%;
+    line-height: 2.5;
+    /* font-size: 0.4rem;
+    border-radius: 0.1rem;
+    margin-top: 0.3rem; */
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.two .weui_cell:before{
+    left:0;
+}
+.three .weui_cell:before{
+    left:0;
+    /* border-top: 1px dashed #d4d4d4; */
+}
+
+
+.paper-type-picker .weui-picker__hd{
+    /* font-size: 0.38rem;
+    padding: 0.1rem 0.3rem; */
+}
+.paper-type-picker .weui-picker__item{
+    /* font-size: 32px; */
+    /* font-size: 0.36rem; */
+    /* height: 0.4rem; */
+    /* line-height: 0.4rem; */
+    /* padding: 0.05rem 0; */
+}
+.paper-type-picker .weui-picker__indicator{
+    /* height: 0.4rem; */
+}
+@media screen and (min-width:760px) {
+    .paper-type-picker .weui-picker__item{
+        /* font-size: 0.32rem;
+        height: 0.32rem;
+        line-height: 0.32rem; */
+    }
+    .paper-type-picker .weui-picker__indicator{
+        /* height: 0.34rem; */
+    }
+    .paper-type-picker .weui-picker__bd{
+        /* height: 3rem; */
+    }
+    /* .paper-type-picker */
+}
+
+/**********number stepper start********/
+.number-stepper{
+    width: 110px;
+    height: 30px;
+    padding: 0;
+    /* border: 1px solid #ededed; */
+    border-radius: 30px;
+    position: relative;
+    margin: 0;
+    position: relative;
+    margin: 0;
+    line-height: 30px;
+    font-size: 14px;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.number-stepper .stepper-handler-wrap{
+    position: absolute;
+    width: 100%;
+    font-size: 24px;
+}
+.number-stepper .stepper-handler-wrap .button{
+    border: none;
+    border-radius: 0;
+    width: 36px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    /* color: #000; */
+    background-color: #2f87e8;
+    position: absolute;
+    display: inline-block;
+    box-sizing: content-box;
+    text-align: center;
+
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+    -webkit-user-select: none;
+    -moz-user-focus: none;
+    -moz-user-select: none;
+    -webkit-appearance:none;
+}
+.number-stepper .stepper-handler-wrap .button.gray{
+    background-color: #dadada;
+}
+.number-stepper .stepper-handler-wrap .button .iconfont{
+    color: #fff;
+    font-size: 16px;
+    vertical-align: text-bottom;
+}
+.number-stepper .stepper-handler-wrap .button.button-right{
+    cursor: pointer;
+    right: 0;
+}
+.number-stepper .stepper-handler-wrap .button.button-left{
+    cursor: pointer;
+    left: 0;
+}
+.number-stepper .stepper-input-wrap{
+    display: inline-block;
+    width: 100%;
+    /* height: 30px;
+    line-height: 30px; */
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #ededed;
+}
+.number-stepper .stepper-input-wrap .stepper-input{
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+    border: 0;
+    padding: 0;
+    background: none;
+    vertical-align: middle;
+    outline:none;
+}
+/**********number stepper end********/
+
+
+/**********paper-type-picker start**********/
+/* .paper-type-picker  */
+
+.weui-mask.weui-animate-fade-in{
+    position: absolute;
+    z-index: 1;
+}
+.weui-picker.weui-animate-slide-up{
+    position: absolute;
+    z-index: 2;
+}
+.mew-paper-type-picker .weui-picker__hd{
+    background-color: #fff;
+}
+.mew-paper-type-picker .weui-picker__action{
+    color: #888;
+}
+.mew-paper-type-picker .weui-picker__action#weui-picker-confirm{
+    color: #1aad19;
+}
+/**********paper-type-picker end**********/
+
+
+/********** finish page start **********/
+.finish-page{
+    background-color: #f0f0f0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.finish-page .advertisement{
+    width: 95%;
+    /* height: 75%; */
+    /* update1*/
+    height: 70%;
+    margin: auto;
+    /* margin-top: 0.2rem;
+    border-radius: 0.05rem; */
+    margin-top: 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.finish-page .click-view{
+    display: block;
+    text-align: center;
+    /* margin: 0.3rem 0;
+    font-size: .28rem; */
+    margin: 15px 0;
+    font-size: 15px;
+}
+.finish-page .click-view a{
+    color: #2694fa;
+}
+.finish-page .advertisement img{
+    /* height: 100%; */
+    width: 100%;
+    /* min-height: 100%; */
+    /* min-width: 100vw; */
+    background-size: cover;
+}
+/********** finish page end **********/
+
+/********************** updata 1.1.0 start ***************/
+.we-chat-pay-page.update1 .weui_cell{
+    padding: 12px 10px;
+}
+.we-chat-pay-page.update1 .weui_cells{
+    margin-top: 10px;
+}
+.we-chat-pay-page.update1 .weui_cells.first-cells{
+    margin-top: 0;
+}
+/********************** updata 1.1.0 end ***************/

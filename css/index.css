@@ -1,0 +1,530 @@
+/* html {
+    font-size:10px;
+}
+
+@media screen and (min-width:480px) and (max-width:639px) {
+    html {
+        font-size: 15px;
+    }
+}
+@media screen and (min-width:640px) and (max-width:719px) {
+    html {
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:720px) and (max-width:749px) {
+    html {
+        font-size: 22.5px;
+    }
+}
+@media screen and (min-width:750px) and (max-width:799px) {
+    html {
+        font-size: 23.5px;
+    }
+}
+@media screen and (min-width:800px) and (max-width:959px) {
+    html {
+        font-size: 25px;
+    }
+}
+@media screen and (min-width:960px) and (max-width:1079px) {
+    html {
+        font-size: 30px;
+    }
+}
+@media screen and (min-width:1080px) {
+    html {
+        font-size: 32px;
+    }
+} */
+
+
+
+
+/* @media only screen and (min-width: 316px){
+	html {
+    	font-size: 62.5%;
+	}
+}
+@media only screen and (min-width: 640px){
+	html {
+    	font-size: 125%;
+	}
+}
+@media only screen and (min-width: 750px){
+	html {
+    	font-size: 150%;
+	}
+}
+@media only screen and (min-width: 1242px){
+	html {
+    	font-size: 187.5%;
+	}
+} */
+
+.file-page-popup{
+/* 测试文件上传页 */
+    position: fixed;
+    /* left: 0; */
+    left: 100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border: none;
+    /* -webkit-animation-duration: .5s; 
+    animation-duration: .5s; */
+    transition: left .5s;
+    -moz-transition: left .5s;	/* Firefox 4 */
+    -webkit-transition: left .5s;	/* Safari 和 Chrome */
+    -o-transition: left .5s;
+}
+
+.index-title{
+    /* height: 5rem; */
+    height: 1rem;
+    background-color: #f0f0f0;
+    text-align: center;
+    /* line-height: 5rem; */
+    /* line-height: 1rem; */
+
+    /* 测试文件上传页 */
+    /* display: none;  */
+}
+/* .index-title .icon-location{
+    height: 1.5rem;
+    vertical-align: sub;
+    margin-right: 0.5rem;
+} */
+.index-title .icon-dingwei{
+    /* font-size: 26px; */
+    font-size: 0.46rem;
+    color: #555;
+    /* vertical-align: sub; */
+    font-weight: 500;
+    vertical-align: middle;
+}
+.index-title .location-printer{
+    /* font-size: 18px; */
+    font-size: 0.36rem;
+    font-weight: bold;
+    display: block;
+    margin: auto;
+    height: 1rem;
+    line-height: 1rem;
+    /* max-width: 20rem; */
+    max-width: 6rem;
+}
+.ellipsis{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.index-page.wing-blank{
+    /* padding: 0 3rem; */
+    padding: 0 0.7rem;
+    /* padding-top: 3rem; */
+    padding-top: 1rem;
+
+    /* 测试文件上传页 */
+    /* display: none;  */
+}
+.index-page.wing-blank .upload-box{
+    position: relative;
+    /* width: 20rem;
+    height: 20rem; */
+    width: 5.6rem;
+    height: 5.6rem;
+    max-width: 800px;
+    max-height: 800px;
+    background-color: #f8f8f8;
+    border: 1px dashed #a4a4a4;
+    margin: auto;
+
+}
+.index-page.wing-blank .upload-box .transverse{
+    /* width: 11rem;
+    height: 0.4rem; */
+    width: 2.7rem;
+    height: 0.06rem;
+    display: inline-block;
+    background-color: #d0d0d0;
+    /* border-radius: 0.4rem; */
+    border-radius: 0.06rem;
+    position: absolute;
+    left:50%;
+    top:50%;
+    /* margin-left:-5.5rem;
+    margin-top:-0.2rem; */
+    margin-left:-1.35rem;
+    margin-top:-0.03rem;
+}
+.index-page.wing-blank .upload-box .vertical{
+    /* height: 11rem;
+    width: 0.4rem; */
+    height: 2.7rem;
+    width: 0.06rem;
+    display: inline-block;
+    background-color: #d0d0d0;
+    /* border-radius: 0.4rem; */
+    border-radius: 0.06rem;
+    position: absolute;
+    left:50%;
+    top:50%;
+    /* margin-top:-5.5rem;
+    margin-left:-0.2rem; */
+    margin-top:-1.35rem;
+    margin-left:-0.03rem;
+}
+
+.index-page.wing-blank.update1 .upload-box{
+    width: 5rem;
+    height: 5rem;
+}
+
+@media screen and (min-width:120rem) {
+    .index-page .upload-box .transverse{
+        width: 150px;
+        height: 10px;
+        margin-left:-75px;
+        margin-top:-5px;
+    }
+    .index-page .upload-box .vertical{
+        height: 150px;
+        width: 10px;
+        margin-top:-75px;
+        margin-left:-5px;
+    }
+    .reminder-box{
+        width: 800px;
+        margin: auto;
+    }
+    .file-page-line{
+        width: 800px;
+        margin: auto;
+    }
+
+}
+.index-page.wing-blank .upload-box .txt{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    /* bottom: 1rem; */
+    bottom: 0.4rem;
+    /* font-size: 18px; */
+    font-size: 0.32rem;
+    color: #919191;
+}
+.index-page .reminder-box{
+    /* margin-top: 5rem; */
+    /* margin-top: 1rem; */
+    margin-top: 0.6rem;
+}
+.index-page .reminder-box .title{
+    /* font-size: 16px; */
+    font-size: 0.22rem;
+    font-weight: bold;
+    /* margin-bottom: 1rem; */
+    margin-bottom: 0.2rem;
+    color: #525252;
+}
+.index-page .reminder-box .list{
+    list-style-position: inside;
+    /* font-size: 12px; */
+    font-size: 0.2rem;
+    color: #676767;
+    line-height: 1.8;
+}
+.index-page .reminder-box .list .help{
+    color: #3371b5;
+    padding-bottom:3px; 
+    border-bottom:1px solid #3371b5;
+}
+.iconfont{
+    font-size: 0.26rem;
+}
+.icon-word{
+    color: #1743a6;
+}
+.icon-word1{
+    color: #072499;
+}
+.icon-PPT{
+    color: #892b27;
+}
+.icon-pdf{
+    color: #bf2924;
+}
+.icon-xls{
+    color: #8b5f3f;
+}
+.icon-JPG{
+    color: #8b5f3f;
+}
+.icon-ppt{
+    color: #882925;
+}
+.icon-wps{
+    color: #368fe7;
+}
+.icon-et{
+    color: #49bf1f;
+}
+.icon-dps{
+    color: #ff7800;
+}
+.icon-PDF{
+    color: #d13c3b;
+}
+.icon-TXT{
+    color: #0e5dab;
+}
+.show404 div {
+    width: 100%;
+    text-align: center!important;
+    font-size: 1.8rem;
+    height: 3rem;
+    line-height: 3rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -1.5rem;
+}
+.select-file-type .weui-actionsheet__cell{
+    font-size: 0.36rem;
+    padding: 0.2rem 0;
+}
+.select-file-type.weui-skin_android .weui-actionsheet{
+    width: 6rem;
+}
+.select-file-type.weui-skin_android .weui-actionsheet__menu{
+    border-radius: 0.04rem;
+}
+.select-file-type.weui-skin_android .weui-actionsheet__cell{
+    padding: 0.26rem 0.48rem;
+    font-size: 0.4rem;
+}
+.file-page{
+    margin-left: 0.15rem;
+    margin-right: 0.15rem;
+    margin-top: 0.15rem;
+}
+.file-page-line{
+    /* display: -webkit-box;
+    display: -webkit-flex;
+    display: flex; */
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 0.1rem;
+}
+.file-page .upload-box{
+    /* width: 1.6rem;
+    height: 1.6rem;
+    background-color: #e9e9e9;
+    margin: 0.04rem; */
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    min-width: 0.1rem;
+    position: relative;
+    margin-right: 0.1rem;
+    margin-left: 0;
+}
+.am-image-picker-list .am-image-picker-item {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+}
+.am-image-picker-list .am-flexbox .am-flexbox-item:after {
+    display: block;
+    content: ' ';
+    padding-bottom: 100%;
+}
+.am-image-picker-list .am-image-picker-item .am-image-picker-item-content {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.06rem;
+    background-size: cover;
+}
+.am-image-picker-list .am-flexbox .am-flexbox-item:nth-child(4n) {
+    margin-right: 0;
+}
+.am-image-picker-list .am-image-picker-upload-btn {
+    box-sizing: border-box;
+    border-radius: 0.06rem;
+    border: 2PX solid #ddd;
+    background-color: #fff;
+}
+.am-image-picker-list .am-image-picker-upload-btn:before, .am-image-picker-list .am-image-picker-upload-btn:after {
+    width: 2PX;
+    height: 0.5rem;
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #ccc;
+}
+.am-image-picker-list .am-image-picker-upload-btn input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+}
+.am-image-picker-list .am-image-picker-upload-btn:after {
+    width: 0.5rem;
+    height: 2PX;
+}
+.am-image-picker-list .am-image-picker-item .am-image-picker-item-remove {
+    width: 0.3rem;
+    height: 0.3rem;
+    position: absolute;
+    right: 0.12rem;
+    top: 0.12rem;
+    text-align: right;
+    vertical-align: top;
+    z-index: 2;
+    background-size: 0.3rem auto;
+    /* background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D'16'%20height%3D'16'%20viewBox%3D'0%200%2016%2016'%20version%3D'1.1'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cg%20id%3D'Page-1'%20stroke%3D'none'%20stroke-width%3D'1'%20fill%3D'none'%20fill-rule%3D'evenodd'%3E%3Ccircle%20id%3D'Oval-98'%20fill-opacity%3D'0.4'%20fill%3D'%23404040'%20cx%3D'8'%20cy%3D'8'%20r%3D'8'%3E%3C%2Fcircle%3E%3Cpath%20d%3D'M11.8979743%2C11.8990375%20L11.8979743%2C11.8990375%20C11.7633757%2C12.0336542%2011.5447877%2C12.0336542%2011.4101891%2C11.8990375%20L8%2C8.48838931%20L4.5887341%2C11.8990375%20C4.45413554%2C12.0336542%204.23554748%2C12.0336542%204.10094892%2C11.8990375%20L4.10094892%2C11.8990375%20C3.96635036%2C11.7644208%203.96635036%2C11.5458033%204.10094892%2C11.4111866%20L7.51221482%2C8.00053847%20L4.10202571%2C4.58881335%20C3.96742715%2C4.45419667%203.96742715%2C4.23557919%204.10202571%2C4.10096251%20L4.10202571%2C4.10096251%20C4.23662427%2C3.96634583%204.45521233%2C3.96634583%204.58981089%2C4.10096251%20L8%2C7.51268762%20L11.4112659%2C4.10203944%20C11.5458645%2C3.96742276%2011.7644525%2C3.96742276%2011.8990511%2C4.10203944%20L11.8990511%2C4.10203944%20C12.0336496%2C4.23665612%2012.0336496%2C4.45527361%2011.8990511%2C4.58989029%20L8.48778518%2C8.00053847%20L11.8979743%2C11.4122636%20C12.0325729%2C11.5468803%2012.0325729%2C11.7644208%2011.8979743%2C11.8990375%20L11.8979743%2C11.8990375%20Z'%20id%3D'Shape'%20fill%3D'%23FFFFFF'%20transform%3D'translate(8.000000%2C%208.000000)%20scale(1%2C%20-1)%20translate(-8.000000%2C%20-8.000000)%20'%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E"); */
+    background-image: url("../image/DeletePhotoBtn.svg");
+}
+
+.file-page-bottom{
+    width: 100%;
+    height: 1rem;
+    /* position: fixed; */
+    position: absolute;
+    bottom: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #343434;
+    justify-content: space-between;
+}
+.file-page-bottom .back{
+    font-size: 0.32rem;
+    color: #fff;
+}
+.file-page-bottom .back .iconfont{
+    font-size: 0.45rem;
+    vertical-align: sub;
+    margin-left: 0.2rem;
+    margin-right: 0.1rem;
+}
+.file-page-bottom .next-step{
+    font-size: 0.38rem;
+    color: #fff;
+    line-height: 0.65rem;
+    height: 0.65rem;
+    background-color: #0d73e3;
+    padding: 0 0.3rem;
+    border-radius: 0.1rem;
+    margin-right: 0.2rem;
+}
+.next-step .weui-loading{
+    width: 0.4rem;
+    height: 0.4rem;
+}
+.next-step.loading{
+    background-color: rgba(13, 115, 227, 0.5);
+    color: #999;
+}
+.am-image-picker-item .weui-progress{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.am-image-picker-item .weui-progress .weui-progress__bar{
+    height: 0.14rem;
+}
+.am-image-picker-item .wait-upload{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    font-size: 0.28rem;
+    color: #fff;
+    text-shadow: 0.02rem -0.02rem 0.03rem #aaa;
+    text-align: center;
+}
+.delete-photo-confirm .weui-dialog{
+    max-width: 6rem;
+    min-width: 5rem;
+    border-radius: 0.06rem;
+}
+.delete-photo-confirm .weui-dialog__hd{
+    padding: 0;
+    line-height: 1.2;
+}
+.delete-photo-confirm .weui-dialog__title{
+    font-weight: 400;
+    font-size: 0.36rem;
+}
+.delete-photo-confirm .weui-dialog__bd{
+    padding: 0;
+    min-height: 0.8rem;
+    font-size: 0.3rem;
+    line-height: 1.3;
+}
+.delete-photo-confirm .weui-dialog__ft{
+    line-height: 0.96rem;
+    font-size: 0.36rem;
+}
+.delete-photo-confirm .weui-skin_android  .weui-dialog__hd{
+    padding-left: 0.5rem;
+}
+.delete-photo-confirm .weui-skin_android .weui-dialog__bd{
+    padding-left: 0.5rem;
+}
+
+.file-page-bottom .back:hover{
+    cursor: pointer;
+}
+.file-page-bottom .next-step{
+    cursor: pointer;
+}
+/**********************choose Upload File start *********************/
+#chooseUploadFile{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+/**********************choose Upload File end *********************/
+/********************** updata 1.1.0 start ***************/
+.index-page .new-input-upload-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+    display: none;
+}
+/********************** updata 1.1.0 end ***************/
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- 开发阶段，不缓存 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Alibaba页面高清方案 -->
+    <script>!function (e) { function t(a) { if (i[a]) return i[a].exports; var n = i[a] = { exports: {}, id: a, loaded: !1 }; return e[a].call(n.exports, n, n.exports, t), n.loaded = !0, n.exports } var i = {}; return t.m = e, t.c = i, t.p = "", t(0) }([function (e, t) { "use strict"; Object.defineProperty(t, "__esModule", { value: !0 }); var i = window; t["default"] = i.flex = function (e, t) { var a = e || 100, n = t || 1, r = i.document, o = navigator.userAgent, d = o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i), l = o.match(/U3\/((\d+|\.){5,})/i), c = l && parseInt(l[1].split(".").join(""), 10) >= 80, p = navigator.appVersion.match(/(iphone|ipad|ipod)/gi), s = i.devicePixelRatio || 1; p || d && d[1] > 534 || c || (s = 1); var u = 1 / s, m = r.querySelector('meta[name="viewport"]'); m || (m = r.createElement("meta"), m.setAttribute("name", "viewport"), r.head.appendChild(m)), m.setAttribute("content", "width=device-width,user-scalable=no,initial-scale=" + u + ",maximum-scale=" + u + ",minimum-scale=" + u), r.documentElement.style.fontSize = a / 2 * s * n + "px" }, e.exports = t["default"] }]); flex(100, 1);</script>
+    <title>立印-无人共享打印</title>
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/font/iconfont.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/fastclick.js"></script>
+    <script>
+        if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', function () {
+                    FastClick.attach(document.body);
+                }, false);
+            }
+    </script>
+</head>
+<body>
+    <div class="index-title">
+        <!-- <span class="location-printer ellipsis"><img class="icon-location" src="../image/location.png" alt="">中大银座4号店</span> -->
+        <span class="location-printer ellipsis"><i class="iconfont icon-dingwei"></i> 中大银座4号店</span>
+    </div>
+    <div class="index-page wing-blank update1">
+        <div class="upload-box" id="uploadBox">
+            <span class="transverse"></span>
+            <span class="vertical"></span>
+            <p class="txt">选择图片或文件</p>
+            <input class="new-input-upload-file" id="chooseUploadFile3" name="allFile_upload3" type="file" multiple="true" />
+        </div>
+        <div class="reminder-box">
+            <p class="title">温馨提示:</p>
+            <ol class="list">
+                <li>您可以上传照片和撰写的文档资料，每次可上传≤9份，每份 ≤200MB，支持多种文档类型: 
+                    <i class="iconfont icon-pdf"></i>&nbsp;pdf&nbsp;&nbsp;
+                    <i class="iconfont icon-word1"></i>&nbsp;doc,docx&nbsp;&nbsp;
+                    <i class="iconfont icon-PPT"></i>&nbsp;ppt,pptx&nbsp;
+                    <i class="iconfont icon-xls"></i>&nbsp;xls,xlsx&nbsp;
+                    <i class="iconfont icon-JPG"></i>&nbsp;jpg, jpeg,png,gif,bmp,tif,&nbsp;
+                    <i class="iconfont icon-TXT"></i>&nbsp;txt&nbsp;&nbsp;
+                </li>
+                <li>上传有问题需要帮助？<a class="help" target="_blank" href="http://www.baidu.com">查看帮助</a>或联系0571-86062752;</li>
+                <li>杭州哦耶科技有限公司版权所有,官网：www.oyewifi.com</li>
+            </ol>
+        </div>
+    </div>
+    <!-- 弹出页 -->
+    <!-- <div class="file-page" id="file-page" style="display: none" > -->
+        <div class="file-page-popup" id="root">
+            <!-- <div class="file-page am-image-picker-list" id="file-page">
+                <div class="file-page-line am-flexbox am-flexbox-align-center">
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                            <div class="weui-progress">
+                                <div class="weui-progress__bar">
+                                    <div class="weui-progress__inner-bar js_progress" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                            <div class="wait-upload">等待上传</div>
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                            <div class="wait-upload">等待上传</div>
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                            <div class="wait-upload">等待上传</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="file-page-line am-flexbox am-flexbox-align-center">
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item">
+                            <div class="am-image-picker-item-remove" role="button" aria-label="Click and Remove this image"></div>
+                            <img class="am-image-picker-item-content" src="../image/abc.png">
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item">
+                        <div class="am-image-picker-item am-image-picker-upload-btn" role="button" aria-label="Choose and add image">
+                            <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" multiple="">
+                        </div>
+                    </div>
+                    <div class="upload-box am-flexbox-item"></div>
+                </div>
+            </div> -->
+            <!-- <div id="root"></div> -->
+            <div class="file-page-bottom">
+                <div class="back"><i class="iconfont icon-jiantou_zuo"></i>返回</div>
+                <div class="next-step loading"> <i class="weui-loading"></i>上传中</div>
+            </div>
+        </div>
+    
+</body>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/weui.min.js"></script>
+<script src="../js/layer.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="../js/FileAPI.html5.min.js"></script>
+<script src="../js/index.js"></script>
+<!-- <script src="../js/photo.js"></script> -->
+<script src="../dist/Photo.js"></script>
+</html>

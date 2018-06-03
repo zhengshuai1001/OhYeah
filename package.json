@@ -1,0 +1,24 @@
+{
+  "name": "OhYeah",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./js/Photo.jsx",
+    "build": "parcel build ./js/Photo.jsx"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "immutability-helper": "^2.7.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.8.1"
+  }
+}
