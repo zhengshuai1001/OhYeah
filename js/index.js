@@ -65,6 +65,7 @@ function judgeBrowser() {
 }
 
 $(function() {
+    initPaperType(); //初始化纸张选择类型
     if (judgeBrowser() == "MicroMessenger") {
         //微信中打开的
         ///初始化，获取签名
@@ -74,7 +75,7 @@ $(function() {
         $("#uploadBox").on('click', selectFileType);
     } else {
         //不是微信中打开的
-        console.log("不是微信中打开的");
+        // console.log("不是微信中打开的");
         $(".new-input-upload-file").css("display","block");
         FileAPIUploadFile("chooseUploadFile3");
     }
@@ -153,7 +154,7 @@ function clickSelectPhoto() {
         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function (res) {
-            console.log(JSON.stringify(res));
+            // console.log(JSON.stringify(res));
             var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
             // window.selectPhoto = localIds;
             showFilePage(); //显示这个页面
@@ -242,6 +243,10 @@ function showFilePage() {
     //     style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
     // });
     $("#root").css("left","0");
+    var token = setTimeout(() => {
+        window.positionReactUploadInput();
+        clearTimeout(token);
+    }, 1000);
 }
 
 /**
@@ -250,7 +255,6 @@ function showFilePage() {
  * @author ZhengGuoQing
  */
 function renderFilePage(localIds, renderType, realFileData, oldSelectPhotoLength) {
-    console.log(localIds);
     
     window.ReactAppSetState({ selectPhoto: localIds, renderType: renderType },function(){
         window.ReactSetFormatPhoto(function(){
@@ -273,7 +277,9 @@ function FileAPIHandle(evt) {
     var formatError = false;
     var sizeError = false;
     FileAPI.filterFiles(files, function (file, info/**Object*/) {
-        if (/doc$|docx$|ppt$|pptx$|xls$|xlsx$|pdf$|txt$/.test(file.name)) {
+        // console.log(file);
+        
+        if (/doc$|docx$|ppt$|pptx$|xls$|xlsx$|pdf$|txt$|jpg$|jpeg$|png$|gif$|bmp$|tif$/.test(file.name)) {
             if (file.size > 200 * FileAPI.MB) {
                 sizeError = true;
                 return false;
@@ -314,7 +320,7 @@ function FileAPIHandle(evt) {
 function FileAPIUpload(i, files, oldSelectPhotoLength) {
     
     if (files.length <= i || i > 100) {
-        console.log("上传文档完毕");
+        // console.log("上传文档完毕");
 
         window.ReactAppSetState({ uploadIng: false })
         return;
@@ -332,7 +338,7 @@ function FileAPIUpload(i, files, oldSelectPhotoLength) {
         fileprogress: function (evt/**Object*/, file/**Object*/, xhr/**Object*/, options/**Object*/) {
             var pr = parseInt(evt.loaded / evt.total * 100); //进度
             // console.log("进度::"+ (pr ? pr : 0));
-            console.log(oldSelectPhotoLength);
+            // console.log(oldSelectPhotoLength);
             
             window.ReactSetOnePhotoProgress(oldSelectPhotoLength, (pr ? pr : 0));
             
@@ -370,13 +376,142 @@ function fileToPreviewImage(files) {
     if (oldSelectPhotoLength > 0) {
         selectPhoto = ReactStateSelectPhoto;
     }
-    files.map(function(value, index){
-        var valueArray = value.name.split(".");
-        var SuffixName = valueArray[valueArray.length -1];
+    var file_eq = 0; //文件索引
+    var img_eq = 0;  //图片索引
+    files.map(function(value, index, elem){
+        
+        //update1 上传文件也可以选择图片
+        if (!/^image/.test(value.type)) {
+            var valueArray = value.name.split(".");
+            var SuffixName = valueArray[valueArray.length - 1];
 
-        var src = '../image/' + SuffixName+'.png';
-        selectPhoto.push(src);
+            var src = '../image/' + SuffixName + '.png';
+            selectPhoto.push(src);
+            file_eq++;
+            if (file_eq + img_eq >= elem.length) {
+                console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
+                renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
+            }
+        } else {
+            var img = FileAPI.Image(value);
+            img.preview(128, 128).get(function (err/**String*/, img/**HTMLElement*/) {
+                
+                var dataURL = canvasToDataURL(img, value.type);
+                selectPhoto.push(dataURL);
+                img_eq++;
+                if (file_eq + img_eq >= elem.length) {
+                    // console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
+                    renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
+                }
+            })
+        }
+
+        // var valueArray = value.name.split(".");
+        // var SuffixName = valueArray[valueArray.length -1];
+
+        // var src = '../image/' + SuffixName+'.png';
+        // selectPhoto.push(src);
     });
-    renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
+    // renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
 
+}
+function canvasToDataURL(canvas, format, quality) {
+    return canvas.toDataURL(format || 'image/jpeg', quality || 1.0);
+}
+/**
+ *初始化，纸张类型选择相关点击事件
+ *
+ * @authorZhengGuoQing
+ */
+function initPaperType() {
+    $("#paper-type-box").on('click', clickPaperType);
+    $("#paper-type-box").on('touchstart', handleTouchStart);
+    $("#paper-type-box").on('touchend', handleTouchEnd);
+    $("#paper-type-box").on('touchcancel', handleTouchEnd); 
+
+    //点击遮罩层，弹窗消失
+    // $("#popover-mask-paper-type").on('click', clickMaskPaperType);
+    //点击选项，弹窗也得消失
+    $("#popover-paper-type").on('click', clickMaskPaperType);
+}
+
+function handleTouchStart() {
+    $("#paper-type-box").addClass("active");
+}
+function handleTouchEnd() {
+    $("#paper-type-box").removeClass("active");
+} 
+
+/**
+ *纸张类型点击事件
+ *
+ * @authorZhengGuoQing
+ */
+function clickPaperType() {
+    var PaperType = $("#popover-paper-type");
+    if (PaperType.hasClass("open")) {
+        //弹窗已经打开
+        PaperType.removeClass("open");
+
+    } else {
+        //弹窗已经关闭
+        PaperType.addClass("open");
+        positionPaperType(); //定位,只能是在弹窗打开后定位。
+
+    }
+}
+
+function clickMaskPaperType() {
+    var PaperType = $("#popover-paper-type");
+    PaperType.removeClass("open");
+}
+
+/**
+ *纸张类型弹窗定位
+ *
+ * @authorZhengGuoQing
+ */
+function positionPaperType() {
+    var icon = $("#paper-type-icon")[0];
+    var top = icon.offsetTop;
+    var left = icon.offsetLeft;
+    // var iconOffset = $("#paper-type-icon").offset();
+    // $("#popover-box").offset({ top: iconOffset.top + 60});
+    $("#popover-box")[0].style.top = top + 60 + "px";
+
+    //计算三角形箭头的偏移量
+    var interval = ($("body").width() - $("#popover-box").width() ) / 2;
+    $("#popover-arrow")[0].style.left = left - parseInt(interval) + 13 + "px";
+}
+
+/**
+ *定位react图片预览页面的输入框位置
+ *
+ * @authorZhengGuoQing
+ */
+function positionReactUploadInput() {
+    var inputHook = $("#inputHook");
+    
+    var uploadInput = $("#chooseUploadFile2");
+    if (!inputHook[0]) {
+        uploadInput[0].style.display = "none";
+    } else {
+        // var widthHook = inputHook.width();
+        // var heightHook = inputHook.height();
+        // var top = inputHook[0].offsetTop;
+        // var left = inputHook[0].offsetLeft;
+        // console.log(widthHook, heightHook, top, left);
+        var offset = inputHook.offset();
+        var top = offset.top;
+        var left = offset.left;
+        var widthHook = offset.width;
+        var heightHook = offset.height;
+        // console.log(offset);
+        
+        uploadInput[0].style.display = "block";
+        uploadInput[0].style.top = top + "px";
+        uploadInput[0].style.left = left + "px";
+        uploadInput[0].style.width = widthHook + "px";
+        uploadInput[0].style.height = heightHook + "px";
+    } 
 }

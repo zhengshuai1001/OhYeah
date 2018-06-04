@@ -29,6 +29,12 @@
         <!-- <span class="location-printer ellipsis"><img class="icon-location" src="../image/location.png" alt="">中大银座4号店</span> -->
         <span class="location-printer ellipsis"><i class="iconfont icon-dingwei"></i> 中大银座4号店</span>
     </div>
+    <div class="paper-type update1">
+        <div id="paper-type-box" class="paper-type-box">
+            <span class="txt">本店支持的纸张类型</span>
+            <i id="paper-type-icon" class="iconfont icon-xiangxiajiantou"></i>
+        </div>
+    </div>
     <div class="index-page wing-blank update1">
         <div class="upload-box" id="uploadBox">
             <span class="transverse"></span>
@@ -117,7 +123,36 @@
                 <div class="next-step loading"> <i class="weui-loading"></i>上传中</div>
             </div>
         </div>
-    
+    <!-- 纸张类型弹出页 -->
+    <div id="popover-paper-type" class="paper-type-popover">
+        <div id="popover-mask-paper-type" class="popover-mask"></div>
+        <div class="popover-box-flex">
+            <div id="popover-box" class="popover-box">
+                <div id="popover-arrow" class="popover-arrow"></div>
+                <div class="popover-inner">
+                    <ul>
+                        <div class="popover-item-container">
+                            <li>A4黑白</li>
+                        </div>
+                        <div class="popover-item-container">
+                            <li>A2彩色</li>
+                        </div>
+                        <div class="popover-item-container">
+                            <li>全彩照片</li>
+                        </div>
+                        <div class="popover-item-container">
+                            <li>高品质A2彩色</li>
+                        </div>
+                        <div class="popover-item-container">
+                            <li>高品质A2彩色高品质A2彩色</li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 图片预览页，当选择类型为文件时会有输入框，输入框位置会移动 -->
+    <input ref="input" id="chooseUploadFile2" name="allFile_upload2" type="file" multiple="true" />
 </body>
 <script src="../js/zepto.min.js"></script>
 <script src="../js/weui.min.js"></script>

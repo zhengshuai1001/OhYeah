@@ -526,5 +526,127 @@
     width: 100%;
     display: none;
 }
+.paper-type.update1{
+    font-size: 0.32rem;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+.index-page.wing-blank.update1{
+    padding-top: 0.2rem;
+}
+.paper-type-box{
+    width: 5rem;
+    display: inline-block;
+    padding: 0.1rem 0;
+}
+.paper-type-box.active{
+    border-radius: 10px;
+    background-color: #eee;
+}
+.paper-type-popover{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    display: none;
+}
+.paper-type-popover.open{
+    display: block;
+}
+.paper-type-popover .popover-mask{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    z-index: 999;
+}
+.paper-type-popover .popover-box{
+    position: absolute;
+    z-index: 1999;
+    /* left: 272px; */
+    /* top: 180px; */
+}
+.paper-type-popover .popover-box ul{
+    list-style: none;
+}
+.popover-arrow{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 1PX;
+    background-color: #fff;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.21);
+    /* right: 16px; */
+    top: -10px;
+}
+.popover-inner{
+    font-size: 0.3rem;
+    color: #000;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.21);
+    overflow: hidden;
+}
+.popover-inner ul{
+    position: relative;
+    background-color: #fff;
+}
+.popover-inner ul li{
+    padding: 10px 16px;
+    text-align: center;
+}
+.popover-box-flex{
+    /* display: flex; */
+    /* justify-content: center; */
+    display: -webkit-box;  /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box;     /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox;  /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex;         /* 新版本语法: Opera 12.1, Firefox 22+ */
+    -webkit-justify-content:center;
+    justify-content:center;
+    -moz-box-pack:center;
+    -webkit--moz-box-pack:center;
+    box-pack:center;
+}
+.popover-inner .popover-item-container:not(:first-child) li::after{
+    content: '';
+    position: absolute;
+    background-color: #ddd;
+    display: block;
+    z-index: 1;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 1PX;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.popover-item-container{
+    position: relative;
+}
+#chooseUploadFile2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+    display: none;
+}
 /********************** updata 1.1.0 end ***************/
 

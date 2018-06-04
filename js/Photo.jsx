@@ -26,6 +26,9 @@ class App extends React.Component {
         this.nextStep = this.nextStep.bind(this);
     }
     componentDidMount() {
+        if (this.state.renderType = "file") {
+            window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
+        }
         
         //先用假数据测试吧
         // let selectPhoto = window.selectPhoto;
@@ -46,6 +49,7 @@ class App extends React.Component {
         let i = 0; //基准
         let FormatPhoto = []; //格式化的二维数组
         let outIndex = 0;
+        
         do {
             let photoLine = []; //格式化的每行数组
             for (let j = 0; j < 4; j++) {
@@ -104,8 +108,8 @@ class App extends React.Component {
     }
     //真真的删除一张图片
     deletePhoto(i) {
-        console.log("deletePhoto::" + i);
-        console.log(this.state.selectPhoto[i])
+        // console.log("deletePhoto::" + i);
+        // console.log(this.state.selectPhoto[i])
 
         // 首先在界面上删除这个图片，至于具体怎么删除，还得看具体代码怎么写的吧
         let oldSelectPhoto = this.state.selectPhoto;
@@ -124,7 +128,7 @@ class App extends React.Component {
         if (this.state.renderType == "file") {
             return;
         }
-        console.log(this.state.selectPhoto[i]);
+        // console.log(this.state.selectPhoto[i]);
         if (window.wx) {
             let current = this.state.selectPhoto[i];
             let urls = this.state.selectPhoto;
@@ -168,8 +172,8 @@ class App extends React.Component {
         let selectPhoto = this.state.selectPhoto;
         if (window.wx) {
             if ((selectPhoto.length <= i && FormatPhoto.length > 0) || i > 100 ) {
-                console.log("上传完毕");
-                console.log(this.state.serverIds);
+                // console.log("上传完毕");
+                // console.log(this.state.serverIds);
                 
                 this.setState({ uploadIng: false})
                 return;
@@ -206,8 +210,8 @@ class App extends React.Component {
                     // serverIds.push(res.serverId); // 返回图片的服务器端ID
 
                     //保存服务器地址
-                    console.log("this.state.serverIds");
-                    console.log(this.state.serverIds);
+                    // console.log("this.state.serverIds");
+                    // console.log(this.state.serverIds);
                     
                     // let oldServerIds = this.state.serverIds;
                     // const newServerIds = update(oldServerIds, { $push: res.serverId });
@@ -254,7 +258,7 @@ class App extends React.Component {
         this.setState({ FormatPhoto: newFormatPhoto });
     }
     //点击返回按钮
-    clickDeletePhoto(event) {
+    clickGoBack(event) {
         event.stopPropagation();
         let type = this.state.renderType == "image" ? "图片" : "文件";
         weui.confirm(`返回将删除已选的${type}`, {
@@ -299,15 +303,30 @@ class App extends React.Component {
     //     }
     // }
     componentDidUpdate() {
-        
+
         if (this.state.renderType == "file") {
+            // window.positionReactUploadInput();
             if (this.refs.input) {
                 window.renderFileFrequency++;
                 // console.log("chooseUploadFile2");
-                window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化           
+                // window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化           
             }
             if (window.renderFileFrequency == 1) {
                 // window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                           
+            }
+
+            // throttleDidUpdate = true;
+            // this.tokenDidUpdate = setTimeout(() => {
+            //     if (throttleDidUpdate = true) {
+            //         throttleDidUpdate = false;
+            //     }
+            //     if (throttleDidUpdate = false) {
+            //         window.positionReactUploadInput();
+            //     }
+            //     clearTimeout(this.tokenDidUpdate)
+            // }, 200);
+            if (this.state.selectPhoto.length > 0 && !this.state.uploadIng) {
+                window.positionReactUploadInput();
             }
         }
     }
@@ -354,10 +373,10 @@ class App extends React.Component {
                                     }
                                     if (val.type == "input") {
                                         let photo = <div key={index + (i).toString()} onClick={() => { this.addPhoto(val.id) }} className="upload-box am-flexbox-item">
-                                                <div className="am-image-picker-item am-image-picker-upload-btn" role="button" aria-label="Choose and add image">
-                                                    {
+                                            <div id={this.state.renderType == "file" ? "inputHook" : ""} className="am-image-picker-item am-image-picker-upload-btn" role="button" aria-label="Choose and add image">
+                                                    {/* {
                                                         this.state.renderType == "file" ? <input ref="input" id="chooseUploadFile2" name="allFile_upload2" type="file" multiple="true" /> : null
-                                                    }
+                                                    } */}
                                                 </div>
                                             </div>
                                         photoLineDOM.push(photo)
@@ -375,7 +394,7 @@ class App extends React.Component {
 
             </div>,
             <div key="2" className="file-page-bottom">
-                <div className="back" onClick={(e) => { this.clickDeletePhoto(e) }}><i className="iconfont icon-jiantou_zuo"></i>返回</div>
+                <div className="back" onClick={(e) => { this.clickGoBack(e) }}><i className="iconfont icon-jiantou_zuo"></i>返回</div>
                 <div 
                     className={this.state.uploadIng ? "next-step loading" : "next-step" }
                 >
