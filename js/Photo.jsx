@@ -12,6 +12,7 @@ class App extends React.Component {
             serverIds: [], //图片上传到腾讯服务器后的地址
             uploadIng: false, //是否在上传中，这个状态用于显示页面底部
             renderType: "image", //渲染的类型，也就是图片上传的类型，有两种，图片image和文档file, 默认是图片
+            initFileAPIUploadFile: false, //是否已经实例化了，只实例化一次
         }
         window.ReactState = this.state;
         window.ReactAppSetState = this.setState.bind(this);
@@ -27,7 +28,10 @@ class App extends React.Component {
     }
     componentDidMount() {
         if (this.state.renderType = "file") {
-            window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
+            if (window.FileAPIUploadFile && !this.state.initFileAPIUploadFile) {
+                window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
+                this.setState({ initFileAPIUploadFile: true});
+            }
         }
         
         //先用假数据测试吧
@@ -305,6 +309,10 @@ class App extends React.Component {
     componentDidUpdate() {
 
         if (this.state.renderType == "file") {
+            if (window.FileAPIUploadFile && !this.state.initFileAPIUploadFile) {
+                window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
+                this.setState({ initFileAPIUploadFile: true });
+            }
             // window.positionReactUploadInput();
             if (this.refs.input) {
                 window.renderFileFrequency++;

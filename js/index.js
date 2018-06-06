@@ -64,9 +64,26 @@ function judgeBrowser() {
     }
 }
 
+/**
+ *简单的判断是不是微信客户端，如果是，使用jssdk，否则使用FileAPI
+ *
+ * @author ZhengGuoQing
+ */
+function judgeBrowser2() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        //在微信中打开
+        return "MicroMessenger";
+    } else {
+        return false;
+    }
+}
+
 $(function() {
+    console.re.log(judgeBrowser2());
+    
     initPaperType(); //初始化纸张选择类型
-    if (judgeBrowser() == "MicroMessenger") {
+    if (judgeBrowser2() == "MicroMessenger") {
         //微信中打开的
         ///初始化，获取签名
         wxSignature();
@@ -243,7 +260,7 @@ function showFilePage() {
     //     style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
     // });
     $("#root").css("left","0");
-    var token = setTimeout(() => {
+    var token = setTimeout(function (){
         window.positionReactUploadInput();
         clearTimeout(token);
     }, 1000);
@@ -272,6 +289,7 @@ function FileAPIUploadFile(domId) {
     var choose = document.getElementById(domId);
     FileAPI.event.on(choose, 'change', FileAPIHandle);
 }
+window.FileAPIUploadFile = FileAPIUploadFile;
 function FileAPIHandle(evt) {
     var files = FileAPI.getFiles(evt);
     var formatError = false;
