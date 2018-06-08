@@ -218,7 +218,7 @@
 .index-page .reminder-box{
     /* margin-top: 5rem; */
     /* margin-top: 1rem; */
-    margin-top: 0.6rem;
+    /* margin-top: 0.6rem; */
 }
 .index-page .reminder-box .title{
     /* font-size: 16px; */
@@ -647,6 +647,93 @@
     opacity: 0;
     width: 100%;
     display: none;
+}
+.popover-close.weui-btn{
+    /* width: 80%; */
+    font-size: 0.24rem;
+    margin: 0.1rem 0.3rem 0.2rem;
+}
+
+.paper-type-box:hover{
+    cursor: pointer;
+}
+#chooseUploadFile3:hover{
+    cursor: pointer;
+}
+.index-page.wing-blank.update2{
+    padding: 0;
+}
+.index-page.update2 .reminder-box{
+    padding: 0 0.7rem;
+    padding-bottom: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* margin-top: 0.2rem;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 1.2rem; */
+}
+/* @media screen and (min-width:900px) {
+    .index-page.update2 .reminder-box{
+        bottom: 0;
+    }
+} */
+.popover-arrow{
+    position: fixed;
+}
+/* .reminder-box-in{
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 0 0.7rem;
+} */
+@media screen and (max-width:700px) {
+    .index-page.update2 .reminder-box{
+        /* bottom: 0; */
+        padding-bottom: 0;
+    }
+}
+/* html{
+    height: 100%;
+}
+@media screen and (min-height:600px) and (max-height:700px) {
+    .index-page.wing-blank.update1{
+        margin-top: 0.9rem;
+    }
+}
+@media screen and (min-height:700px) and (max-height:800px) {
+    .index-page.wing-blank.update1{
+        margin-top: 1.5rem;
+    }
+}
+@media screen and (min-height:800px) {
+    .index-page.wing-blank.update1{
+        margin-top: 2rem;
+    }
+} */
+html,body{
+    height: 100%;
+}
+/* .position-flex{
+    height: 100%;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+} */
+.position-flex{
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 /********************** updata 1.1.0 end ***************/
 

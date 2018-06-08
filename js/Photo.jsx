@@ -264,6 +264,11 @@ class App extends React.Component {
     //点击返回按钮
     clickGoBack(event) {
         event.stopPropagation();
+        if (this.state.selectPhoto.length < 1) {
+            //如果长度为0，则直接返回
+            this.goBack();
+            return;
+        }
         let type = this.state.renderType == "image" ? "图片" : "文件";
         weui.confirm(`返回将删除已选的${type}`, {
             className: "delete-photo-confirm",
@@ -333,7 +338,8 @@ class App extends React.Component {
             //     }
             //     clearTimeout(this.tokenDidUpdate)
             // }, 200);
-            if (this.state.selectPhoto.length > 0 && !this.state.uploadIng) {
+            // if (this.state.selectPhoto.length > 0 && !this.state.uploadIng) {
+                if (!this.state.uploadIng) {
                 window.positionReactUploadInput();
             }
         }

@@ -80,7 +80,7 @@ function judgeBrowser2() {
 }
 
 $(function() {
-    console.re.log(judgeBrowser2());
+    // console.re.log(judgeBrowser2());
     
     initPaperType(); //初始化纸张选择类型
     if (judgeBrowser2() == "MicroMessenger") {
@@ -236,7 +236,13 @@ function wxInit(timestamp, nonceStr, signature, link) {
                 // console.log(res);
             },
             fail: function (res) {
-                alert("微信版本太低，请升级微信！");
+                // alert("微信版本太低，请升级微信！");
+                //不支持微信jssdk,换上传插件
+                $("#uploadBox").off('click', selectFileType);
+                //不是微信中打开的
+                // console.log("不是微信中打开的");
+                $(".new-input-upload-file").css("display","block");
+                FileAPIUploadFile("chooseUploadFile3");
                 // console.log(res);
             }
         });
@@ -496,10 +502,13 @@ function positionPaperType() {
     // var iconOffset = $("#paper-type-icon").offset();
     // $("#popover-box").offset({ top: iconOffset.top + 60});
     $("#popover-box")[0].style.top = top + 60 + "px";
+    $(".popover-arrow")[0].style.top = top + 50 + "px";
 
     //计算三角形箭头的偏移量
     var interval = ($("body").width() - $("#popover-box").width() ) / 2;
-    $("#popover-arrow")[0].style.left = left - parseInt(interval) + 13 + "px";
+    // $("#popover-arrow")[0].style.left = left - parseInt(interval) + 13 + "px";
+    $("#popover-arrow")[0].style.left = left + 10 + "px";
+
 }
 
 /**

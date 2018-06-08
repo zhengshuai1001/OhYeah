@@ -7,6 +7,7 @@ $(function(){
     $("#paperTypePickerCell").on('touchcancel', handleTouchEnd); 
     handleClickStepper(); //给输入框绑定事件
     computePagesNumber(); //初始化时也计算一次总页数
+    noBackspace(); //绑定禁止浏览器回退的操作
 });
 
 function handleTouchStart() {
@@ -14,7 +15,61 @@ function handleTouchStart() {
 } 
 function handleTouchEnd() {
     $("#paperTypePickerCell").css("background-color", "initial");
+}
+/**
+ *禁止回退
+ *
+ * @author ZhengGuoQing
+ */
+function noBackspace() {
+    if (window.history && window.history.pushState) {
+        // $(window).on('popstate', function () {
+        //     window.history.pushState('forward', null, '#');
+        //     window.history.forward(1);
+        //     alert("不可回退");
+        // });
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+            confirmHistoryBack()
+        });
+    }
 } 
+
+function confirmHistoryBack() {
+    weui.confirm("返回将删除已选文件", {
+        className: "delete-photo-confirm",
+        title: "确认返回吗?",
+        buttons: [{
+            label: '取消',
+            type: 'default',
+            onClick: function () {}
+        }, {
+            label: '确定',
+            type: 'primary',
+            onClick: function () {
+                // window.location.href="../html/index.html";
+                history.pushState(null, null, "../html/index.html");
+                window.location.reload();
+            }
+        }]
+    });
+}
+
+// $(document).ready(function () {
+//     if (window.history && window.history.pushState) {
+//         // window.addEventListener("popstate", function () {
+//         //     window.history.pushState('forward', null, '#');
+//         //     window.history.forward(1);
+//         //     alert("不可回退");
+//         // });
+//         // history.pushState(null, null, document.URL);
+//         // window.addEventListener('popstate', function () {
+//         //     history.pushState(null, null, document.URL);
+//         //     alert("不可回退");
+//         // });
+//     }
+// });
 
 /**
  * 选择纸张类型,单列picker
@@ -22,8 +77,8 @@ function handleTouchEnd() {
 function picker() {
     weui.picker([
         {
-            label: 'A4黑白',
-            value: 0.10,
+            label: 'A4黑白',//显示的文字
+            value: 0.10,// 纸张的价格
         },
         {
             label: 'A4彩色',
@@ -184,7 +239,7 @@ function computePagesNumber() {
     if (!isNaN(fileNumber) && !isNaN(pagesNumber) && !isNaN(stepperInput)) {
         $("#sumPagesNumber").html(parseInt(fileNumber * pagesNumber * stepperInput));
     }
-    console.log("computePagesNumber");
+    // console.log("computePagesNumber");
     
     computeTotalPrice();//计算总价
 }

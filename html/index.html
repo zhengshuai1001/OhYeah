@@ -25,37 +25,42 @@
     </script>
 </head>
 <body>
-    <div class="index-title">
-        <!-- <span class="location-printer ellipsis"><img class="icon-location" src="../image/location.png" alt="">中大银座4号店</span> -->
-        <span class="location-printer ellipsis"><i class="iconfont icon-dingwei"></i> 中大银座4号店</span>
-    </div>
-    <div class="paper-type update1">
-        <div id="paper-type-box" class="paper-type-box">
-            <span class="txt">本店支持的纸张类型</span>
-            <i id="paper-type-icon" class="iconfont icon-xiangxiajiantou"></i>
+    <div class="position-flex">
+        <div class="position-top">
+            <div class="index-title">
+                <span class="location-printer ellipsis"><i class="iconfont icon-dingwei"></i> 中大银座4号店</span>
+            </div>
+            <div class="paper-type update1">
+                <div id="paper-type-box" class="paper-type-box">
+                    <span class="txt">本店支持的纸张类型</span>
+                    <i id="paper-type-icon" class="iconfont icon-xiangxiajiantou"></i>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="index-page wing-blank update1">
-        <div class="upload-box" id="uploadBox">
-            <span class="transverse"></span>
-            <span class="vertical"></span>
-            <p class="txt">选择图片或文件</p>
-            <input class="new-input-upload-file" id="chooseUploadFile3" name="allFile_upload3" type="file" multiple="true" />
+        <div class="index-page wing-blank update1 position-middle">
+            <div class="upload-box" id="uploadBox">
+                <span class="transverse"></span>
+                <span class="vertical"></span>
+                <p class="txt">选择图片或文件</p>
+                <input class="new-input-upload-file" id="chooseUploadFile3" name="allFile_upload3" type="file" multiple="true" />
+            </div>
         </div>
-        <div class="reminder-box">
-            <p class="title">温馨提示:</p>
-            <ol class="list">
-                <li>您可以上传照片和撰写的文档资料，每次可上传≤9份，每份 ≤200MB，支持多种文档类型: 
-                    <i class="iconfont icon-pdf"></i>&nbsp;pdf&nbsp;&nbsp;
-                    <i class="iconfont icon-word1"></i>&nbsp;doc,docx&nbsp;&nbsp;
-                    <i class="iconfont icon-PPT"></i>&nbsp;ppt,pptx&nbsp;
-                    <i class="iconfont icon-xls"></i>&nbsp;xls,xlsx&nbsp;
-                    <i class="iconfont icon-JPG"></i>&nbsp;jpg, jpeg,png,gif,bmp,tif,&nbsp;
-                    <i class="iconfont icon-TXT"></i>&nbsp;txt&nbsp;&nbsp;
-                </li>
-                <li>上传有问题需要帮助？<a class="help" target="_blank" href="http://www.baidu.com">查看帮助</a>或联系0571-86062752;</li>
-                <li>杭州哦耶科技有限公司版权所有,官网：www.oyewifi.com</li>
-            </ol>
+        <div class="index-page wing-blank update2 position-bottom">
+            <div class="reminder-box">
+                <p class="title">温馨提示:</p>
+                <ol class="list">
+                    <li>您可以上传照片和撰写的文档资料，每次可上传≤9份，每份 ≤200MB，支持多种文档类型: 
+                        <i class="iconfont icon-pdf"></i>&nbsp;pdf&nbsp;&nbsp;
+                        <i class="iconfont icon-word1"></i>&nbsp;doc,docx&nbsp;&nbsp;
+                        <i class="iconfont icon-PPT"></i>&nbsp;ppt,pptx&nbsp;
+                        <i class="iconfont icon-xls"></i>&nbsp;xls,xlsx&nbsp;
+                        <i class="iconfont icon-JPG"></i>&nbsp;jpg, jpeg,png,gif,bmp,tif,&nbsp;
+                        <i class="iconfont icon-TXT"></i>&nbsp;txt&nbsp;&nbsp;
+                    </li>
+                    <li>上传有问题需要帮助？<a class="help" target="_blank" href="http://www.baidu.com">查看帮助</a>或联系0571-86062752;</li>
+                    <li>杭州哦耶科技有限公司版权所有,官网：www.oyewifi.com</li>
+                </ol>
+            </div>
         </div>
     </div>
     <!-- 弹出页 -->
@@ -146,7 +151,9 @@
                         <div class="popover-item-container">
                             <li>高品质A2彩色高品质A2彩色</li>
                         </div>
+                        <!-- <a href="javascript:;" class="weui_btn weui_btn_warn">确认</a> -->
                     </ul>
+                    <a href="javascript:;" class="popover-close weui-btn weui-btn_warn">关闭</a>
                 </div>
             </div>
         </div>
@@ -159,7 +166,7 @@
 <script src="../js/layer.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="../js/FileAPI.html5.min.js"></script>
-<script src="//console.re/connector.js" data-channel="xfcy1001" id="consolerescript"></script>
+<!-- <script src="//console.re/connector.js" data-channel="xfcy1001" id="consolerescript"></script> -->
 <script src="../js/index.js"></script>
 <!-- <script src="../js/photo.js"></script> -->
 <script src="../dist/Photo.js"></script>

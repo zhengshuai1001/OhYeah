@@ -9,7 +9,7 @@
     /* font-size: 0.3rem; */
     font-size: 15px;
     color: #3c3c3c;
-    font-weight: 700;
+    /* font-weight: 700; */
 }
 .we-chat-pay-page .weui_cell_ft{
     /* font-size: 0.28rem; */
@@ -253,5 +253,11 @@
 }
 .we-chat-pay-page.update1 .weui_cells.first-cells{
     margin-top: 0;
+}
+/* 如果在PC网页，则限制最大宽度 */
+@media screen and (min-width:760px) {
+    .finish-page .advertisement{
+        width: 760px;
+    }
 }
 /********************** updata 1.1.0 end ***************/
