@@ -413,7 +413,7 @@ function fileToPreviewImage(files) {
             selectPhoto.push(src);
             file_eq++;
             if (file_eq + img_eq >= elem.length) {
-                console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
+                // console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
                 renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
             }
         } else {
