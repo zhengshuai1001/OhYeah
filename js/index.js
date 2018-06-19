@@ -1,15 +1,4 @@
-// window.selectPhoto = []; //用户已选择的图片列表
-window.selectPhoto = [
-    "http://pics.sc.chinaz.com/files/pic/pic9/201711/zzpic7762.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201712/zzpic8700.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201706/zzpic4339.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201706/zzpic4114.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201704/zzpic2716.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201704/zzpic3036.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201701/zzpic803.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201701/zzpic653.jpg",
-    "http://pics.sc.chinaz.com/files/pic/pic9/201607/apic21794.jpg",
-];
+window.selectPhoto = []; //用户已选择的图片列表
 /**
  * 判断浏览器是不是微信浏览器
  * 
@@ -80,7 +69,6 @@ function judgeBrowser2() {
 }
 
 $(function() {
-    // console.re.log(judgeBrowser2());
     
     initPaperType(); //初始化纸张选择类型
     if (judgeBrowser2() == "MicroMessenger") {
@@ -92,28 +80,10 @@ $(function() {
         $("#uploadBox").on('click', selectFileType);
     } else {
         //不是微信中打开的
-        // console.log("不是微信中打开的");
         $(".new-input-upload-file").css("display","block");
         FileAPIUploadFile("chooseUploadFile3");
     }
 });
-
-/**
- * 显示错误信息
- * 
- * @author ZhengGuoQing
- * @param {any} text 
- */
-function show404(text) {
-    // return 0;
-    var text = text || "请在手机微信上浏览此页面！";
-    layer.open({
-        type: 1
-        , className: 'show404'
-        , content: text
-        , style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
-    });
-}
 
 /**
  * 选择文件类型，图片或文件
@@ -125,14 +95,11 @@ function selectFileType() {
         {
             label: '照片',
             onClick: function () {
-                // console.log("照片");
-                // clickSelectPhoto();
                 
             }
         }, {
             label: '文件',
             onClick: function () {
-                // clickSelectFile();
             }
         }
     ], [
@@ -145,16 +112,9 @@ function selectFileType() {
     ], {
         className: 'select-file-type',
         isAndroid: false
-        // onClose: function () {
-        //     // console.log('关闭');
-        // }
     });
     var cell = $(".weui-actionsheet__cell")[1];
-    // var cell = $(".weui-actionsheet__menu")[0];
-    // console.log(cell);
-    // $(cell).append('<input id="chooseUploadFile" name="allFile_upload" type="file" multiple="true" accept="text/plain,application/msword,application/pdf,application/vnd.ms-powerpoint,application/vnd.ms-excel">')
     $(cell).append('<input id="chooseUploadFile" name="allFile_upload" type="file" multiple="true" />')
-    // $(cell).append('<input id="chooseUploadFile" name="allFile_upload" type="file" multiple="true" accept=".xlsx,.xls,.txt,.pdf,.doc,.docx,.ppt,.pptx">')
     var photoItem = $(".weui-actionsheet__cell")[0];
     $(photoItem).on('click', clickSelectPhoto);
     $(cell).on('click', clickSelectFile);
@@ -171,9 +131,7 @@ function clickSelectPhoto() {
         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function (res) {
-            // console.log(JSON.stringify(res));
             var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-            // window.selectPhoto = localIds;
             showFilePage(); //显示这个页面
             renderFilePage(localIds, "image"); //将图片渲染到页面上
         }
@@ -202,7 +160,6 @@ function wxSignature() {
         success: function (res) {
             var res = JSON.parse(res);
             if (res.success) {
-                // console.log(res);
                 wxInit(res.data.timestamp, res.data.nonceStr, res.data.signature, res.data.url);
             } else {
                 console.log(res.message);
@@ -232,18 +189,13 @@ function wxInit(timestamp, nonceStr, signature, link) {
         wx.checkJsApi({
             jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'getLocalImgData'],
             success: function (res) {
-                // console.log("接口测试成功");
-                // console.log(res);
+                //接口测试成功;
             },
             fail: function (res) {
-                // alert("微信版本太低，请升级微信！");
                 //不支持微信jssdk,换上传插件
                 $("#uploadBox").off('click', selectFileType);
-                //不是微信中打开的
-                // console.log("不是微信中打开的");
                 $(".new-input-upload-file").css("display","block");
                 FileAPIUploadFile("chooseUploadFile3");
-                // console.log(res);
             }
         });
         wx.error(function (res) {
@@ -259,12 +211,6 @@ function wxInit(timestamp, nonceStr, signature, link) {
  * @author ZhengGuoQing
  */
 function showFilePage() {
-    // layer.open({
-    //     type: 1,
-    //     content: document.getElementById("file-page-popup").innerHTML,
-    //     shadeClose: false,
-    //     style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
-    // });
     $("#root").css("left","0");
     var token = setTimeout(function (){
         window.positionReactUploadInput();
@@ -301,7 +247,6 @@ function FileAPIHandle(evt) {
     var formatError = false;
     var sizeError = false;
     FileAPI.filterFiles(files, function (file, info/**Object*/) {
-        // console.log(file);
         
         if (/doc$|docx$|ppt$|pptx$|xls$|xlsx$|pdf$|txt$|jpg$|jpeg$|png$|gif$|bmp$|tif$/.test(file.name)) {
             if (file.size > 200 * FileAPI.MB) {
@@ -344,7 +289,7 @@ function FileAPIHandle(evt) {
 function FileAPIUpload(i, files, oldSelectPhotoLength) {
     
     if (files.length <= i || i > 100) {
-        // console.log("上传文档完毕");
+        //上传文档完毕;
 
         window.ReactAppSetState({ uploadIng: false })
         return;
@@ -353,16 +298,14 @@ function FileAPIUpload(i, files, oldSelectPhotoLength) {
             window.ReactAppSetState({ uploadIng: true })
         }
     }
+    //上传文件
     FileAPI.upload({
-        // url: 'https://www.huakewang.com/upload/upload_doc666',
         url: 'https://p.oyewifi.com/php/file_uploading.php',
         files: {
             Filedata: files[i]
         },
         fileprogress: function (evt/**Object*/, file/**Object*/, xhr/**Object*/, options/**Object*/) {
-            var pr = parseInt(evt.loaded / evt.total * 100); //进度
-            // console.log("进度::"+ (pr ? pr : 0));
-            // console.log(oldSelectPhotoLength);
+            var pr = parseInt(evt.loaded / evt.total * 100); //上传进度
             
             window.ReactSetOnePhotoProgress(oldSelectPhotoLength, (pr ? pr : 0));
             
@@ -370,14 +313,30 @@ function FileAPIUpload(i, files, oldSelectPhotoLength) {
         complete: function (err, xhr) {
             if (!err) {
                 //上传成功
-                var upfileFilePath = JSON.parse(xhr.responseText);
+
+                //重要提醒，因为文件有删除按钮，文件上传成功后，必须返回一个id，当调用删除接口时，传给服务器该id.
+                var response = JSON.parse(xhr.responseText);
+                if (response.id) {
+                    var ReactServerIds = window.ReactState.serverIds;
+                    ReactServerIds.push(response.id);
+                    window.ReactAppSetState({
+                        serverIds: ReactServerIds
+                    });
+                }
+
                 window.ReactSetOnePhotoProgress(oldSelectPhotoLength, 100);
                 i++;
                 oldSelectPhotoLength++;
                 FileAPIUpload(i, files, oldSelectPhotoLength);
             } else {
+                //上传失败，将图片的服务器ID设置为-1
+                var ReactServerIds = window.ReactState.serverIds;
+                ReactServerIds.push("-1");
+                window.ReactAppSetState({
+                    serverIds: ReactServerIds
+                });
+
                 //发生错误,上传下一张
-                // console.log(err);
                 window.ReactSetOnePhotoProgress(oldSelectPhotoLength, -1);
                 i++;
                 oldSelectPhotoLength++;
@@ -404,7 +363,7 @@ function fileToPreviewImage(files) {
     var img_eq = 0;  //图片索引
     files.map(function(value, index, elem){
         
-        //update1 上传文件也可以选择图片
+        //上传文件也可以选择图片
         if (!/^image/.test(value.type)) {
             var valueArray = value.name.split(".");
             var SuffixName = valueArray[valueArray.length - 1];
@@ -413,7 +372,6 @@ function fileToPreviewImage(files) {
             selectPhoto.push(src);
             file_eq++;
             if (file_eq + img_eq >= elem.length) {
-                // console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
                 renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
             }
         } else {
@@ -424,19 +382,11 @@ function fileToPreviewImage(files) {
                 selectPhoto.push(dataURL);
                 img_eq++;
                 if (file_eq + img_eq >= elem.length) {
-                    // console.log("file_eq + img_eq:::", file_eq, img_eq, elem.length);
                     renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
                 }
             })
         }
-
-        // var valueArray = value.name.split(".");
-        // var SuffixName = valueArray[valueArray.length -1];
-
-        // var src = '../image/' + SuffixName+'.png';
-        // selectPhoto.push(src);
     });
-    // renderFilePage(selectPhoto, "file", files, oldSelectPhotoLength); //将文件的封面渲染到页面上
 
 }
 function canvasToDataURL(canvas, format, quality) {
@@ -454,7 +404,6 @@ function initPaperType() {
     $("#paper-type-box").on('touchcancel', handleTouchEnd); 
 
     //点击遮罩层，弹窗消失
-    // $("#popover-mask-paper-type").on('click', clickMaskPaperType);
     //点击选项，弹窗也得消失
     $("#popover-paper-type").on('click', clickMaskPaperType);
 }
@@ -499,14 +448,11 @@ function positionPaperType() {
     var icon = $("#paper-type-icon")[0];
     var top = icon.offsetTop;
     var left = icon.offsetLeft;
-    // var iconOffset = $("#paper-type-icon").offset();
-    // $("#popover-box").offset({ top: iconOffset.top + 60});
     $("#popover-box")[0].style.top = top + 60 + "px";
     $(".popover-arrow")[0].style.top = top + 50 + "px";
 
     //计算三角形箭头的偏移量
     var interval = ($("body").width() - $("#popover-box").width() ) / 2;
-    // $("#popover-arrow")[0].style.left = left - parseInt(interval) + 13 + "px";
     $("#popover-arrow")[0].style.left = left + 10 + "px";
 
 }
@@ -523,17 +469,11 @@ function positionReactUploadInput() {
     if (!inputHook[0]) {
         uploadInput[0].style.display = "none";
     } else {
-        // var widthHook = inputHook.width();
-        // var heightHook = inputHook.height();
-        // var top = inputHook[0].offsetTop;
-        // var left = inputHook[0].offsetLeft;
-        // console.log(widthHook, heightHook, top, left);
         var offset = inputHook.offset();
         var top = offset.top;
         var left = offset.left;
         var widthHook = offset.width;
         var heightHook = offset.height;
-        // console.log(offset);
         
         uploadInput[0].style.display = "block";
         uploadInput[0].style.top = top + "px";
@@ -541,4 +481,53 @@ function positionReactUploadInput() {
         uploadInput[0].style.width = widthHook + "px";
         uploadInput[0].style.height = heightHook + "px";
     } 
+}
+
+/**
+ * 将使用React框架的Photo.jsx中有关服务器对接的代码抽离出来
+ * 
+ * 该函数在成功上传图片到微信服务器并返回serverId后调用,只有微信端上传图片会用这个函数，其他环境上传图片是直接上传到自己的服务器
+ * 
+ * 使用微信jssdk的wx.uploadImage接口上传图片后，会返回 serverId（即 media_id），利用 serverId 可以去微信服务器将文件下载到自己的服务器。
+ *
+ * @author ZhengGuoQing
+ * @param {*} serverId  微信图片id
+ */
+function wxUploadImageToServer(serverId) {
+    //调用接口，将serverId发送给后端，个人服务器下载微信服务器的图片
+
+}
+
+/**
+ * 将使用React框架的Photo.jsx中有关服务器对接的代码抽离出来
+ * 
+ * 删除通过微信服务器上传的某张图片
+ * 
+ * 在调用删除图片的接口成功返回后，需要调用callBack回调函数，更新页面，移除刚刚删除的那张图片
+ *
+ * @author ZhengGuoQing
+ * @param {*} serverId  微信图片id
+ * @param {*} callBack  定义在React框架Photo.jsx里的回调函数，在页面上移除刚刚删除的那张图片
+ */
+function deletePhotoToWx(serverId, callBack) {
+    //调用接口，将serverId发送给后端
+
+    callBack(); //该回调函数应该在接口返回成功后调用。保证服务器先成功删除照片，然后网页界面移除照片
+}
+
+/**
+ * 将使用React框架的Photo.jsx中有关服务器对接的代码抽离出来
+ * 
+ * 删除个人服务器上的某个文件
+ * 
+ * 在调用删除文件的接口成功返回后，需要调用callBack回调函数，更新页面，移除刚刚删除的那个文件
+ *
+ * @author ZhengGuoQing
+ * @param {*} serverId  文件的服务器id
+ * @param {*} callBack  定义在React框架Photo.jsx里的回调函数，在页面上移除刚刚删除的那个文件
+ */
+function deletePhotoToServer(serverId, callBack) {
+    //调用接口，将serverId发送给后端
+
+    callBack(); //该回调函数应该在接口返回成功后调用。保证服务器先成功删除文件，然后网页界面移除那个文件
 }

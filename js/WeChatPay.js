@@ -1,6 +1,4 @@
 $(function(){
-    // $("#paperTypePicker").on('click', picker);
-    //update1
     $("#paperTypePickerCell").on('click', picker); 
     $("#paperTypePickerCell").on('touchstart', handleTouchStart); 
     $("#paperTypePickerCell").on('touchend', handleTouchEnd); 
@@ -23,11 +21,6 @@ function handleTouchEnd() {
  */
 function noBackspace() {
     if (window.history && window.history.pushState) {
-        // $(window).on('popstate', function () {
-        //     window.history.pushState('forward', null, '#');
-        //     window.history.forward(1);
-        //     alert("不可回退");
-        // });
         history.pushState(null, null, document.URL);
         window.addEventListener('popstate', function () {
             history.pushState(null, null, document.URL);
@@ -48,28 +41,12 @@ function confirmHistoryBack() {
             label: '确定',
             type: 'primary',
             onClick: function () {
-                // window.location.href="../html/index.html";
                 history.pushState(null, null, "../html/index.html");
                 window.location.reload();
             }
         }]
     });
 }
-
-// $(document).ready(function () {
-//     if (window.history && window.history.pushState) {
-//         // window.addEventListener("popstate", function () {
-//         //     window.history.pushState('forward', null, '#');
-//         //     window.history.forward(1);
-//         //     alert("不可回退");
-//         // });
-//         // history.pushState(null, null, document.URL);
-//         // window.addEventListener('popstate', function () {
-//         //     history.pushState(null, null, document.URL);
-//         //     alert("不可回退");
-//         // });
-//     }
-// });
 
 /**
  * 选择纸张类型,单列picker
@@ -102,7 +79,6 @@ function picker() {
         container: 'body',
         defaultValue: [0],
         onChange: function (result) {
-            // console.log(result[0].label)
         },
         onConfirm: function (result) {
             console.log(result)
@@ -239,7 +215,6 @@ function computePagesNumber() {
     if (!isNaN(fileNumber) && !isNaN(pagesNumber) && !isNaN(stepperInput)) {
         $("#sumPagesNumber").html(parseInt(fileNumber * pagesNumber * stepperInput));
     }
-    // console.log("computePagesNumber");
     
     computeTotalPrice();//计算总价
 }

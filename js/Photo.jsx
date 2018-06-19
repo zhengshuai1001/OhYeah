@@ -9,7 +9,7 @@ class App extends React.Component {
         this.state = {
             selectPhoto: [],
             FormatPhoto: [],
-            serverIds: [], //图片上传到腾讯服务器后的地址
+            serverIds: [], //图片或文件上传到服务器后的id,如果是使用微信jssdk上传图片，此时id为微信服务器上的serverId（即 media_id），否则为个人服务器上的文件id。id == -1,表示上传失败
             uploadIng: false, //是否在上传中，这个状态用于显示页面底部
             renderType: "image", //渲染的类型，也就是图片上传的类型，有两种，图片image和文档file, 默认是图片
             initFileAPIUploadFile: false, //是否已经实例化了，只实例化一次
@@ -25,25 +25,15 @@ class App extends React.Component {
         window.ReactSetOnePhotoProgress = this.setOnePhotoProgress.bind(this); 
         this.goBack = this.goBack.bind(this);
         this.nextStep = this.nextStep.bind(this);
+        this.viewDeletePhoto = this.viewDeletePhoto.bind(this);
     }
     componentDidMount() {
         if (this.state.renderType = "file") {
             if (window.FileAPIUploadFile && !this.state.initFileAPIUploadFile) {
-                window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
+                window.FileAPIUploadFile("chooseUploadFile2"); //防止多次实例化                       
                 this.setState({ initFileAPIUploadFile: true});
             }
         }
-        
-        //先用假数据测试吧
-        // let selectPhoto = window.selectPhoto;
-        // this.setState({ selectPhoto },()=>{
-        //     this.setFormatPhoto(() => {
-        //         if (this.state.FormatPhoto.length > 0) {
-        //             this.uploadImages(0);
-        //         }
-        //     });
-        // })
-        
     }
     //通过原始图片列表，构造一个长度为4的二维数组，加上进度条状态，用于渲染 
     setFormatPhoto(callBack = ()=>{}) {
@@ -110,29 +100,51 @@ class App extends React.Component {
             }]
         });
     }
-    //真真的删除一张图片
+    //调用接口删除一张图片,只有在文件上传成功时，才会向服务器发送删除图片的请求。
+    //特别提醒，由于不知道删除图片的接口是什么，
+    //之前的做法是删除图片时先在界面上删除图片，然后去服务器真实的删除图片，
+    //如果删除图片的接口调用错误，会导致图片在网页界面上删除了，但服务器上并没有删除，于是将界面上删除图片的代码，用回调函数的方式移到接口返回成功后执行
     deletePhoto(i) {
-        // console.log("deletePhoto::" + i);
-        // console.log(this.state.selectPhoto[i])
+        //保存在本地的图片或文件的服务器id
+        let serverId = this.state.serverIds[i];
 
-        // 首先在界面上删除这个图片，至于具体怎么删除，还得看具体代码怎么写的吧
+        //具体的删除图片代码，得看后端是怎写的
+        if (this.state.renderType == "image") {
+            //此时为调用微信jssdk，删除图片，传递该图片在腾讯服务器上的serverId（即 media_id）
+            if (window.deletePhotoToWx) {
+                window.deletePhotoToWx(serverId, (i) => {
+                    this.viewDeletePhoto(i);
+                })
+            }
+        } else {
+            //此时为上传文件方式，不管选择的是图片还是文件，都是保存到自己服务器上，此时传递个人服务器上该文件的id
+            if (window.deletePhotoToServer) {
+                window.deletePhotoToServer(serverId, (i) => {
+                    this.viewDeletePhoto(i);
+                })
+            }
+        }
+        
+    }
+    // 在界面上删除这个图片
+    viewDeletePhoto(i) {
         let oldSelectPhoto = this.state.selectPhoto;
         const newSelectPhoto = update(oldSelectPhoto, { $splice: [[i, 1]] });
-        this.setState({ selectPhoto: newSelectPhoto }, () => {
+
+        //删除保存的服务器id
+        let oldServerIds = this.state.serverIds;
+        const newServerIds = update(oldServerIds, { $splice: [[i, 1]] });
+
+        this.setState({ selectPhoto: newSelectPhoto, serverIds: newServerIds }, () => {
             this.setFormatPhoto();
             window.ReactState = this.state;
         });
-
-        //具体的删除图片代码，得看后端是怎写的
-        
     }
     //点击图片，预览
     clickPhoto(i) {
-        // console.log("clickPhoto::" + i);
         if (this.state.renderType == "file") {
             return;
         }
-        // console.log(this.state.selectPhoto[i]);
         if (window.wx) {
             let current = this.state.selectPhoto[i];
             let urls = this.state.selectPhoto;
@@ -142,8 +154,8 @@ class App extends React.Component {
             });
         }
     }
+    //添加图片
     addPhoto(i) {
-        // console.log("addPhoto::" + i);
         if (this.state.renderType == "file") {
             return;
         }
@@ -153,9 +165,7 @@ class App extends React.Component {
                 sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: (res) => {
-                    // console.log(JSON.stringify(res));
                     let localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    // window.selectPhoto = localIds;
                     let oldSelectPhoto = this.state.selectPhoto;
                     const newSelectPhoto = update(oldSelectPhoto, { $push: localIds });
                     this.setState({ selectPhoto: newSelectPhoto }, () => {
@@ -176,9 +186,6 @@ class App extends React.Component {
         let selectPhoto = this.state.selectPhoto;
         if (window.wx) {
             if ((selectPhoto.length <= i && FormatPhoto.length > 0) || i > 100 ) {
-                // console.log("上传完毕");
-                // console.log(this.state.serverIds);
-                
                 this.setState({ uploadIng: false})
                 return;
             } else {
@@ -211,19 +218,14 @@ class App extends React.Component {
                 success: (res) => {
                     //去掉进度条动画
                     clearInterval(this.token);
-                    // serverIds.push(res.serverId); // 返回图片的服务器端ID
-
-                    //保存服务器地址
-                    // console.log("this.state.serverIds");
-                    // console.log(this.state.serverIds);
-                    
-                    // let oldServerIds = this.state.serverIds;
-                    // const newServerIds = update(oldServerIds, { $push: res.serverId });
-                    // this.setState({ serverIds: newServerIds });
+                    // 返回图片的服务器端ID
+                    //保存图片的服务器端ID
                     let serverIds = this.state.serverIds;
                     serverIds.push(res.serverId);
                     this.setState({ serverIds });
-
+                    if (window.wxUploadImageToServer) {
+                        window.wxUploadImageToServer(res.serverId);
+                    }
                     //更新单个图片的上传进度，索引为i的这个图片，上传成功 
                     this.setOnePhotoProgress(i, 100);
 
@@ -232,9 +234,14 @@ class App extends React.Component {
                     this.uploadImages(i);
                 },
                 fail: (res) => {
+                    //上传失败，将图片的服务器ID设置为-1
+                    let serverIds = this.state.serverIds;
+                    serverIds.push("-1");
+                    this.setState({ serverIds });
+
                     //去掉进度条动画
                     clearInterval(this.token);
-                    // $.alert('上传失败，请重新上传！');
+                    //上传失败，请重新上传;
                     //更新单个图片的上传进度，索引为i的这个图片，上传失败，进度设置为-1 ，表示上传失败
                     this.setOnePhotoProgress(i, -1);
                     i++;
@@ -242,7 +249,7 @@ class App extends React.Component {
                 }
             });
         } else {
-            
+            //如果没有微信jssdk，此时会使用上传文件的方式。该方法在index.js中实现
         }
     }
     /**
@@ -255,7 +262,6 @@ class App extends React.Component {
      */
     setOnePhotoProgress(i = 0, newProgress = 0) {
         let oldFormatPhoto = this.state.FormatPhoto;
-        // const newFormatPhoto = update(oldFormatPhoto, { $push: res.serverId });
         let outIndex = parseInt(i / 4); //外层索引
         let inIndex = i - outIndex * 4; //内层索引
         const newFormatPhoto = update(oldFormatPhoto, { [outIndex]: { [inIndex]: { progress: { $set: newProgress } } } });
@@ -296,50 +302,21 @@ class App extends React.Component {
     }
     nextStep() {
         //跳转到下一页
-        // window.location.href = 'http://www.baidu.com';
         window.location.href = '../html/WeChatPay.html';
     }
     componentWillUnmount() {
         window.renderFileFrequency = 0; //重置文件类型的界面渲染次数
     }
-    // componentWillUpdate() {
-    //     if (this.state.renderType == "file") {
-    //         if (this.refs.input) {
-    //             console.log("FileAPI off 0");
-    //             var choose = ReactDOM.findDOMNode(this.refs.input);
-    //             FileAPI.event.off(choose)
-    //         }
-    //     }
-    // }
     componentDidUpdate() {
-
         if (this.state.renderType == "file") {
             if (window.FileAPIUploadFile && !this.state.initFileAPIUploadFile) {
                 window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                       
                 this.setState({ initFileAPIUploadFile: true });
             }
-            // window.positionReactUploadInput();
             if (this.refs.input) {
-                window.renderFileFrequency++;
-                // console.log("chooseUploadFile2");
-                // window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化           
+                window.renderFileFrequency++;       
             }
-            if (window.renderFileFrequency == 1) {
-                // window.FileAPIUploadFile("chooseUploadFile2"); //会导致多次实例化                           
-            }
-
-            // throttleDidUpdate = true;
-            // this.tokenDidUpdate = setTimeout(() => {
-            //     if (throttleDidUpdate = true) {
-            //         throttleDidUpdate = false;
-            //     }
-            //     if (throttleDidUpdate = false) {
-            //         window.positionReactUploadInput();
-            //     }
-            //     clearTimeout(this.tokenDidUpdate)
-            // }, 200);
-            // if (this.state.selectPhoto.length > 0 && !this.state.uploadIng) {
-                if (!this.state.uploadIng) {
+            if (!this.state.uploadIng) {
                 window.positionReactUploadInput();
             }
         }
@@ -388,11 +365,8 @@ class App extends React.Component {
                                     if (val.type == "input") {
                                         let photo = <div key={index + (i).toString()} onClick={() => { this.addPhoto(val.id) }} className="upload-box am-flexbox-item">
                                             <div id={this.state.renderType == "file" ? "inputHook" : ""} className="am-image-picker-item am-image-picker-upload-btn" role="button" aria-label="Choose and add image">
-                                                    {/* {
-                                                        this.state.renderType == "file" ? <input ref="input" id="chooseUploadFile2" name="allFile_upload2" type="file" multiple="true" /> : null
-                                                    } */}
-                                                </div>
                                             </div>
+                                        </div>
                                         photoLineDOM.push(photo)
                                     }
                                     if (val.type == "empty") {
